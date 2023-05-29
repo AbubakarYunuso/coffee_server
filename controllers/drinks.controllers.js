@@ -26,6 +26,7 @@ module.exports.drinksController = {
     },
     getDrinkById: async (req,res)=>{
         try {
+            console.log(req.params);
             let drink =await Drink.findById(req.params.id)
             res.json(drink)
         } catch (error) {
@@ -34,10 +35,10 @@ module.exports.drinksController = {
     },
     getInStockDrink:async(req, res) =>{
         try {
-            let drinksInStock = await Drink.find({inStock: req.params.id})
+            let drinksInStock = await Drink.find({inStock: true})
             res.json(drinksInStock)
         } catch (error) {
-            res.json("errore"+":"+" При выводе напитков на экран произошла ошибка!!!")
+            res.json(error.message)
         }
     },
     deleteDrink: async (req,res)=>{
